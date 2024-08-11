@@ -83,6 +83,9 @@ namespace OFGB
                 // Disable Edge desktop search widget bar
                 bool key16 = CreateKey("Software\\Policies\\Microsoft\\Edge", "WebWidgetAllowed");
                 cb12.IsChecked = key16;
+
+                // Revert User Profile Folder Locations
+                bool key17  CreateKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders");
             }
             else
             {
@@ -161,6 +164,11 @@ namespace OFGB
                     break;
                 case "cb12":
                     Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Edge", "WebWidgetAllowed", Convert.ToInt32(!enable));
+                    break;
+                case "cb13":
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders", "Desktop", "%USERPROFILE%\\Desktop");
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders", "Pictures", "%USERPROFILE%\\Pictures");
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders", "Personal", "%USERPROFILE%\\Documents");
                     break;
             }
         }
